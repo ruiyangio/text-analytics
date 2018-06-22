@@ -1,5 +1,5 @@
 from core.bayes import Bayes
 
 model = Bayes.Bayes()
-model.train("./resources/small_set.txt")
-#model.evaluateAccuracy("./resources/small_set.txt")
+model.train("./resources/train_set.txt")
+print(model.evaluateAccuracy("./resources/validation_set.txt"))

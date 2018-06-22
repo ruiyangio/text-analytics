@@ -3,7 +3,7 @@ from app.controller import get_sentiment
 
 class Sentiment(ObjectType):
     sentiment = String()
-    logProbability = Float()
+    probability = Float()
 
 class Query(ObjectType):
     sentiment = Field(Sentiment, text=String())
@@ -12,7 +12,7 @@ class Query(ObjectType):
         sentimentObject = get_sentiment(text)
         return Sentiment(
             sentiment = sentimentObject["sentiment"],
-            logProbability = sentimentObject["logProbability"]
+            probability = sentimentObject["probability"]
         )
 
 schema = Schema(query=Query)

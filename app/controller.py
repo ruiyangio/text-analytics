@@ -1,2 +1,9 @@
+from core.bayes import Bayes
+
+bayesModel = Bayes.Bayes()
+bayesModel.initialze()
+
 def get_sentiment(text):
-    return { "sentiment": "Positive", "logProbability": -10 }
+    pred_res, proba = bayesModel.predict(text)
+    label = "Positive" if pred_res else "Negative"
+    return { "sentiment": label, "probability": proba }

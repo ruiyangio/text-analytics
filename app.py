@@ -6,13 +6,13 @@ app = Flask(__name__)
 app.debug = True
 
 app.add_url_rule(
-    '/graphql',
+    '/ml/graphql',
     view_func=GraphQLView.as_view('graphql', schema=schema, graphiql=True)
 )
 
-@app.route('/')
+@app.route('/ml')
 def index():
-	return "Go to /graphql"
+	return "Go to /ml/graphql"
 
 if __name__ == "__main__":
 	app.run(host='0.0.0.0', port=3020)
