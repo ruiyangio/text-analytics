@@ -12,8 +12,8 @@ class Bayes(object):
     LABEL_SEPRATOR = "@@@@"
     LABEL_POSITIVE = "pos"
     LABEL_NEGATIVE = "neg"
-    VECTOR_FILE = "../../models/bayes_vectorizer.sav"
-    MODEL_FILE = "../../models/bayes_model.sav"
+    VECTOR_FILE = "./models/bayes_vectorizer.sav"
+    MODEL_FILE = "./models/bayes_model.sav"
 
     def __init__(self):
         self.tfidf_transformer = TfidfTransformer()
@@ -40,7 +40,7 @@ class Bayes(object):
             else:
                 target.append(0)
             train_content[i] = s
-        
+
         self.vectorizer = CountVectorizer(min_df=2, tokenizer=Util.defaultTokenize)
         tfidf_transformer = TfidfTransformer()
         train_counts = self.vectorizer.fit_transform(train_content)

@@ -105,3 +105,4 @@ venv.bak/
 
 # App specific
 resources/
+models/
