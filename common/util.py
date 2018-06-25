@@ -28,15 +28,15 @@ class Util(object):
         text = re.sub(r"\\x(\S)*", "", text)
 
         #General Cleanup and Symbols
-        text = re.sub(r"[^A-Za-z0-9(),!?\'\`]", " ", text)
+        text = re.sub(r"[^A-Za-z0-9(),:.!;?\'\`]", " ", text)
         text = re.sub(r"\'s", " \'s", text)
         text = re.sub(r"\'ve", " \'ve", text)
         text = re.sub(r"n\'t", " n\'t", text)
         text = re.sub(r"\'re", " \'re", text)
         text = re.sub(r"\'d", " \'d", text)
         text = re.sub(r"\'ll", " \'ll", text)
-        text = re.sub(r",", " , ", text)
-        text = re.sub(r"!", " ! ", text)
+        # text = re.sub(r",", " , ", text)
+        # text = re.sub(r"!", " ! ", text)
         text = re.sub(r"\(", " \( ", text)
         text = re.sub(r"\)", " \) ", text)
         text = re.sub(r"\?", " \? ", text)
@@ -60,6 +60,8 @@ class Util(object):
         pprev = None
         for word in words:
             stripped = word.strip(delims).lower()
+            if not stripped:
+                continue
             negated = "not_" + stripped if negation else stripped
             result.append(negated)
             if prev:

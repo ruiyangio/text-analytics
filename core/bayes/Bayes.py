@@ -7,6 +7,7 @@ from sklearn.naive_bayes import MultinomialNB
 from sklearn.model_selection import train_test_split
 from sklearn.externals import joblib
 from common.util import Util
+from sklearn.metrics import confusion_matrix
 
 class Bayes(object):
     LABEL_SEPRATOR = "@@@@"
@@ -44,6 +45,7 @@ class Bayes(object):
             train_content[i] = s
         train_counts = self.vectorizer.fit_transform(train_content)
         train_tfidf = self.tfidf_transformer.fit_transform(train_counts)
+        print(train_tfidf.shape)
         self.clf = MultinomialNB().fit(train_tfidf, target)
         joblib.dump(self.vectorizer, self.VECTOR_FILE)
         joblib.dump(self.tfidf_transformer, self.IFIDF_FILE)
@@ -63,6 +65,8 @@ class Bayes(object):
 
         correct = 0
         total = 0
+        y_true = []
+        y_pred = []
 
         for line in test_content:
             total += 1
@@ -70,9 +74,19 @@ class Bayes(object):
             parts = line.split(self.LABEL_SEPRATOR)
             s = parts[0]
             label = parts[1]
+            if label == self.LABEL_POSITIVE:
+                y_true.append(1)
+            else:
+                y_true.append(0) 
             pred_res, proba = self.predict(s)
+            y_pred.append(pred_res)
             pred_label = self.LABEL_POSITIVE if pred_res else self.LABEL_NEGATIVE
             if pred_label == label:
                 correct += 1
+
+        y_true = np.array(y_true)
+        y_pred = np.array(y_pred)
+        confusion = confusion_matrix(y_true, y_pred)
+        print(confusion)
 
         return correct / total
