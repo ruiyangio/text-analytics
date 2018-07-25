@@ -2,7 +2,7 @@ import re
 
 class Util(object):
     @staticmethod
-    def normalizeString(text):
+    def normalize_string(text):
         #EMOJIS
         text = re.sub(r":\)", "emojihappy1", text)
         text = re.sub(r":P", "emojihappy2", text)
@@ -45,8 +45,8 @@ class Util(object):
         return text.strip().lower()
 
     @staticmethod
-    def defaultTokenize(text):
-        text = Util.normalizeString(text)
+    def default_tokenize(text):
+        text = Util.normalize_string(text)
         # return re.split(r"\s+", text)
         return Util.negate_sequence(text)
 

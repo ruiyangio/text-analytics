@@ -1,9 +1,10 @@
-from core.bayes import Bayes
+from core.models.bayes import Bayes
+from core.models.logistic import Logistic
 
-bayesModel = Bayes.Bayes()
-bayesModel.initialze()
+model = Logistic()
+model.load()
 
 def get_sentiment(text):
-    pred_res, proba = bayesModel.predict(text)
+    pred_res, proba = model.predict(text)
     label = "Positive" if pred_res else "Negative"
     return { "sentiment": label, "probability": proba }

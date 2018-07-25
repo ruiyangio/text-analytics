@@ -1,11 +1,13 @@
-from core.bayes import Bayes
+from core.models.bayes import Bayes
+from core.models.logistic import Logistic
 import time
 
-model = Bayes.Bayes()
+model = Logistic()
 start = time.time()
-model.train("./resources/train_set.txt")
+model.train("./resources/imdb_train.txt")
 end1 = time.time()
-print(end1 - start)
-print(model.evaluateAccuracy("./resources/validation_set.txt"))
+print("train time: " + str(end1 - start))
+model.evaluateAccuracy("./resources/imdb_validation.txt")
 end2 = time.time()
-print(end2 - end1)
+print("eval time: " + str(end2 - end1))
+model.save()
