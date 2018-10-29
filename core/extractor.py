@@ -53,7 +53,6 @@ class FeatureExtractor(object):
     def transform_text(self, text):
         count_feature = self.vectorizer.transform([text])
         tfidf = self.tfidf_transformer.transform(count_feature)
-
         return tfidf
 
     def load(self):

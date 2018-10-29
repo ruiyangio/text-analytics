@@ -11,7 +11,7 @@ from sklearn.metrics import confusion_matrix
 from core.extractor import FeatureExtractor
 
 class ModelBase(object):
-    def __init__(self, vector_save_path, tfidf_save_path, model_save_path, ngram_range=(1,2)):
+    def __init__(self, vector_save_path, tfidf_save_path, model_save_path, ngram_range=(1,1)):
         self.feature_extractor = FeatureExtractor(vector_save_path, tfidf_save_path, ngram_range)
         self.vector_save_path = vector_save_path
         self.tfidf_save_path = tfidf_save_path
